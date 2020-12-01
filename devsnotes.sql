@@ -62,6 +62,21 @@ ALTER TABLE `notes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
+ALTER TABLE `notes`
+   `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `notes`
+CHANGE `id` `id` int NOT NULL AUTO_INCREMENT FIRST,
+ADD `type` int NOT NULL DEFAULT '1' AFTER `id`,
+CHANGE `title` `title` varchar(100) COLLATE 'utf8mb4_general_ci' NOT NULL AFTER `type`,
+CHANGE `body` `body` text COLLATE 'utf8mb4_general_ci' NULL AFTER `title`,
+ADD `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD `updated_at` datetime NULL ON UPDATE CURRENT_TIMESTAMP AFTER `created_at`,
+ADD `archived_at` datetime NULL AFTER `updated_at`,
+ADD `deleted_at` datetime NULL AFTER `archived_at`,
+COLLATE 'utf8mb4_general_ci';
